@@ -8,7 +8,7 @@ const port = process.env.PORT || 8000;
 
 
 
-app.use(cookieParser());
+
 app.use(cors({
     origin: '*', // Allow requests from the client if in local machine -http://localhost:5173
     credentials: true
