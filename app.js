@@ -1,17 +1,16 @@
 const express = require('express');
 const routes = require("./routes/routes");
-const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
+
 
 const cors = require("cors");
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 
 
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:5173', // Allow requests from the client
+    origin: '*', // Allow requests from the client if in local machine -http://localhost:5173
     credentials: true
 }));
 app.use(express.urlencoded({ extended: false }));
