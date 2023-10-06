@@ -1,8 +1,5 @@
 const { User, Post } = require("../models/model");
 const {mongoose} = require("../database/connection")
-const jwt = require("jsonwebtoken");
-
-const jwtSecret = 'super-secret';
 
 function generateRandomString(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -35,8 +32,6 @@ exports.login = async (req, res) => {
         const { username, password } = req.body;
         const user = await User.findOne({ username, password });
         if (user) {
-            // const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1d' });
-            // res.cookie('token', user.key, { httpOnly: true });
             res.status(200).json({ token: user.key, message: 'Login successful' });
         } else {
             res.status(401).json({ message: 'Wrong credentials' });
@@ -63,10 +58,6 @@ exports.posts = async (req, res) => {
     }
 };
 
-exports.logout = async (req, res) => {
-    req.session = null;
-    res.status(201).json({ action: true });
-}
 
 exports.media = async (req, res) => {
     try {
